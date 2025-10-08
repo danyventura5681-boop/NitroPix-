@@ -1,0 +1,25 @@
+from datetime import datetime
+import os
+from dotenv import load_dotenv
+from telegram import Update
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from tronpy import Tron
+
+# Cargar variables del entorno
+load_dotenv()
+TRX_KEY = os.getenv("TRX_PRIVATE_KEY")
+
+# Inicializar cliente TRON
+client = Tron()
+
+# Comando /start
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    await update.message.reply_text(f"🔥 Bienvenido a NitroPix, Dany.\nHora actual: {now}")
+
+# Inicializar el bot
+app = ApplicationBuilder().token("8248755019:AAGGwlXpQu6q6kCjtH9t3vtUIuQHjWnUDKE").build()
+app.add_handler(CommandHandler("start", start))
+
+app.run_polling()
+
