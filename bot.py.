@@ -1,4 +1,0 @@
-from datetime import datetime
-
-# Ejemplo de uso
-print("Hora actual:", datetime.now())
